@@ -7,8 +7,16 @@ import connectDB from "./db/index.js";
 dotenv.config({
      path: './.env'
      })
-connectDB();
-
+// connectDB(); //=>ye method jo appan ne likha hai vo asyncronus method hai and asyncronus jab bhi complete hota hai to promise return karta hai
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT||8000,()=>{
+        console.log(`server is connected at port ${process.env.PORT}`)
+    })
+})
+.catch((err)=>{
+    console.log("Error in promise Of dbConnect",err);
+})
 
 /*
 //IIFE – Immediately Invoked Function Expression
